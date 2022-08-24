@@ -3,15 +3,14 @@ FROM python:3.9
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY . requirements.txt /src
-RUN pip3 install --no-cache-dir --upgrade -r /src/requirements.txt
+COPY . requirements.txt /home
+RUN pip3 install --no-cache-dir --upgrade -r /home/requirements.txt
 
-COPY . /src
-# RUN python3 /src/manage.py makemigrations
-# RUN python3 /src/manage.py migrate
+COPY . /home/stocks_products/
+
 EXPOSE 8000
 
-WORKDIR src
+WORKDIR home/stocks_products/
 
-ENTRYPOINT ["/src/entrypoint.sh"]
+ENTRYPOINT ["/home/stocks_products/entrypoint.sh"]
 
